@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Connect with Me</title>
-  <style>
-    /* General body styles */
-    body {
-      margin: 0;
+  ...
+</head>
+<body>
+  ...
+</body>
+</html>
+   margin: 0;
       height: 100vh;
       background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
       overflow: hidden;
