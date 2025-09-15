@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Connect with Me</title>
   <style>
-    /* General body styles */
     body {
       margin: 0;
       height: 100vh;
@@ -17,19 +16,56 @@
       align-items: center;
       position: relative;
     }
+    .container {
+      background-color: rgba(40, 40, 40, 0.8);
+      padding: 18px 8px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      width: 95vw;
+      max-width: 350px;
+      z-index: 10;
+    }
+    h1 {
+      color: white;
+      font-weight: 500;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    .icon-row {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: center;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    img.social-icon {
+      width: 52px;
+      height: 52px;
+      transition: transform 0.3s;
+      filter: drop-shadow(0 0 3px black);
+    }
+    img.social-icon:active, img.social-icon:hover {
+      transform: scale(1.13);
+      opacity: 0.9;
+    }
 
-    /* Snowflake styling */
+    /* Snowflake styling - minimal for mobile */
     .snowflake {
       position: absolute;
       top: -10px;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       background: white;
       border-radius: 50%;
       opacity: 0.8;
       animation: fall linear infinite;
+      z-index: 1;
     }
-
     @keyframes fall {
       to {
         transform: translateY(100vh);
@@ -37,72 +73,45 @@
       }
     }
 
-    /* Container styles */
-    .container {
-      background-color: rgba(40, 40, 40, 0.7);
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      z-index: 10;
-    }
-
-    .icon-row {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-    }
-
-    a {
-      color: white;
-      text-decoration: none;
-    }
-
-    a:hover {
-      opacity: 0.8;
-    }
-
-    img.social-icon {
-      width: 70px;
-      height: 70px;
-      transition: transform 0.3s;
-      filter: drop-shadow(0 0 3px black);
-    }
-
-    img.social-icon:hover {
-      transform: scale(1.2);
-    }
-
-    h1 {
-      color: white;
-      margin-bottom: 20px;
-      font-weight: 400;
+    /* Responsive tweaks */
+    @media only screen and (max-width: 480px) {
+      .container {
+        max-width: 95vw;
+        padding: 12px 3vw;
+        border-radius: 15px;
+      }
+      h1 {
+        font-size: 1.13rem;
+        margin-bottom: 14px;
+      }
+      img.social-icon {
+        width: 43px;
+        height: 43px;
+      }
+      .icon-row {
+        gap: 22px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Snowflakes (you can generate more dynamically with JavaScript) -->
   <script>
-    const snowflakeCount = 100;
+    const snowflakeCount = 36;
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-
-      const size = Math.random() * 5 + 2;
+      const size = Math.random() * 4 + 2;
       const left = Math.random() * window.innerWidth;
-      const duration = Math.random() * 5 + 5;
-      const delay = Math.random() * 10;
-
+      const duration = Math.random() * 6 + 6;
+      const delay = Math.random() * 12;
       snowflake.style.width = `${size}px`;
       snowflake.style.height = `${size}px`;
       snowflake.style.left = `${left}px`;
       snowflake.style.animationDuration = `${duration}s`;
       snowflake.style.animationDelay = `${delay}s`;
-
       document.body.appendChild(snowflake);
     }
   </script>
-
   <div class="container">
     <h1>Connect with Me</h1>
     <div class="icon-row">
