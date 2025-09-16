@@ -69,8 +69,8 @@
     .snowflake {
       position: absolute;
       top: -18px;
-      width: 20px;
-      height: 20px;
+      width: 14px;
+      height: 14px;
       background: white;
       border-radius: 60%;
       opacity: 0.67;
@@ -110,7 +110,7 @@
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-      const size = Math.random() * 16 + 20; // between 20 and 36 px
+      const size = Math.random() * 10 + 10; // size between 10px and 20px
       const left = Math.random() * window.innerWidth;
       const duration = Math.random() * 6 + 8;
       const delay = Math.random() * 12;
