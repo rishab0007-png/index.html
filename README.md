@@ -106,11 +106,11 @@
 </head>
 <body>
   <script>
-    const snowflakeCount = 60;  // increased the number of snowflakes
+    const snowflakeCount = 100;  // increased snowflakes count for denser effect
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-      const size = Math.random() * 10 + 10; // size between 10px and 20px
+      const size = Math.random() * 10 + 10; // snowflake size between 10px and 20px
       const left = Math.random() * window.innerWidth;
       const duration = Math.random() * 6 + 8;
       const delay = Math.random() * 12;
