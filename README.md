@@ -106,7 +106,7 @@
 </head>
 <body>
   <script>
-    const snowflakeCount = 36;
+    const snowflakeCount = 60;  // increased the number of snowflakes
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
