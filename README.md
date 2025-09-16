@@ -16,90 +16,95 @@
       align-items: center;
       position: relative;
     }
+
     .container {
-      background-color: rgba(40, 40, 40, 0.8);
-      padding: 32px 18px;
+      background-color: rgba(40, 40, 40, 0.85);
+      padding: 36px 28px;
       border-radius: 22px;
       text-align: center;
-      box-shadow: 0 0 18px rgba(0, 0, 0, 0.48);
-      width: 97vw;
-      max-width: 480px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      width: 95vw;
+      max-width: 500px;
       z-index: 10;
     }
+
     h1 {
       color: white;
       font-weight: 500;
-      font-size: 1.7rem;
-      margin-bottom: 28px;
-      letter-spacing: 1.3px;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
     }
+
     .icon-row {
       display: flex;
-      flex-direction: column;
-      gap: 38px;
-      align-items: center;
+      flex-direction: row;         /* <-- horizontal layout */
+      gap: 36px;                   /* spacing between icons */
+      justify-content: center;
+      flex-wrap: wrap;             /* wrap on small screens */
     }
+
     a {
       color: white;
       text-decoration: none;
     }
+
     img.social-icon {
-      width: 82px;
-      height: 82px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      filter: drop-shadow(0 0 15px #2ba84a); /* WhatsApp green by default */
-      box-shadow: 0 0 22px #fff, 0 0 12px #aaa;
-      border-radius: 25%;
+      width: 70px;
+      height: 70px;
+      transition: transform 0.3s, filter 0.3s;
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6));
+      border-radius: 50%;
+      background-color: white;
+      padding: 10px;
     }
-    /* Glowing colors by platform */
-    a[aria-label="Instagram"] img.social-icon {
-      filter: drop-shadow(0 0 15px #e1306c);
-      box-shadow: 0 0 30px #e1306c60, 0 0 12px #fff;
+
+    img.social-icon:active,
+    img.social-icon:hover {
+      transform: scale(1.2);
+      filter: brightness(1.1) drop-shadow(0 0 10px white);
+      background-color: #e0e0e0;
     }
-    a[aria-label="Telegram"] img.social-icon {
-      filter: drop-shadow(0 0 15px #0088cc);
-      box-shadow: 0 0 30px #0088cc60, 0 0 12px #fff;
-    }
-    img.social-icon:active, img.social-icon:hover {
-      transform: scale(1.22) rotate(-6deg);
-      opacity: 0.95;
-      box-shadow: 0 0 32px #fff, 0 0 24px #aaa;
-    }
+
+    /* Snowflake styling */
     .snowflake {
       position: absolute;
-      top: -18px;
-      width: 20px;
-      height: 20px;
+      top: -10px;
       background: white;
-      border-radius: 60%;
-      opacity: 0.67;
+      border-radius: 50%;
+      opacity: 0.7;
       animation: fall linear infinite;
       z-index: 1;
-      filter: blur(1px);
     }
+
     @keyframes fall {
-      100% {
+      to {
         transform: translateY(100vh);
-        opacity: 0.07;
+        opacity: 0;
       }
     }
+
     /* Responsive tweaks */
     @media only screen and (max-width: 480px) {
       .container {
-        max-width: 99vw;
-        padding: 18px 2vw;
-        border-radius: 16px;
+        max-width: 95vw;
+        padding: 24px 18px;
+        border-radius: 18px;
       }
+
       h1 {
-        font-size: 1.17rem;
-        margin-bottom: 18px;
+        font-size: 1.4rem;
+        margin-bottom: 24px;
       }
+
       img.social-icon {
-        width: 56px;
-        height: 56px;
+        width: 58px;
+        height: 58px;
+        padding: 8px;
       }
+
       .icon-row {
-        gap: 28px;
+        gap: 24px;
       }
     }
   </style>
@@ -110,18 +115,22 @@
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-      const size = Math.random() * 16 + 20; // 20px to 36px snowflakes
+      
+      const size = Math.random() * 10 + 6; // Between 6px and 16px
       const left = Math.random() * window.innerWidth;
-      const duration = Math.random() * 6 + 8;
+      const duration = Math.random() * 6 + 6;
       const delay = Math.random() * 12;
+
       snowflake.style.width = `${size}px`;
       snowflake.style.height = `${size}px`;
       snowflake.style.left = `${left}px`;
       snowflake.style.animationDuration = `${duration}s`;
       snowflake.style.animationDelay = `${delay}s`;
+
       document.body.appendChild(snowflake);
     }
   </script>
+
   <div class="container">
     <h1>Connect with Me</h1>
     <div class="icon-row">
