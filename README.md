@@ -35,9 +35,9 @@
     }
     .icon-row {
       display: flex;
-      flex-direction: row;    /* changed to row for horizontal alignment */
-      gap: 38px;              /* horizontal spacing between icons */
-      justify-content: center;/* centers icons horizontally */
+      flex-direction: row;
+      gap: 38px;
+      justify-content: center;
       align-items: center;
       margin-top: 18px;
     }
@@ -49,11 +49,10 @@
       width: 82px;
       height: 82px;
       transition: transform 0.3s, box-shadow 0.3s;
-      filter: drop-shadow(0 0 15px #2ba84a); /* WhatsApp green by default */
+      filter: drop-shadow(0 0 15px #2ba84a);
       box-shadow: 0 0 22px #fff, 0 0 12px #aaa;
       border-radius: 25%;
     }
-    /* Glowing colors by platform */
     a[aria-label="Instagram"] img.social-icon {
       filter: drop-shadow(0 0 15px #e1306c);
       box-shadow: 0 0 30px #e1306c60, 0 0 12px #fff;
@@ -85,7 +84,6 @@
         opacity: 0.07;
       }
     }
-    /* Responsive tweaks */
     @media only screen and (max-width: 480px) {
       .container {
         max-width: 99vw;
@@ -112,7 +110,7 @@
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-      const size = Math.random() * 16 + 20; // 20px to 36px snowflakes
+      const size = Math.random() * 16 + 20; // between 20 and 36 px
       const left = Math.random() * window.innerWidth;
       const duration = Math.random() * 6 + 8;
       const delay = Math.random() * 12;
