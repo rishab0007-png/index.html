@@ -16,56 +16,66 @@
       align-items: center;
       position: relative;
     }
+
     .container {
-      background-color: rgba(40, 40, 40, 0.8);
-      padding: 18px 8px;
-      border-radius: 18px;
+      background-color: rgba(40, 40, 40, 0.85);
+      padding: 36px 28px;
+      border-radius: 22px;
       text-align: center;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
       width: 95vw;
-      max-width: 350px;
+      max-width: 500px;
       z-index: 10;
     }
+
     h1 {
       color: white;
       font-weight: 500;
-      font-size: 1.4rem;
-      margin-bottom: 18px;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
       letter-spacing: 1px;
     }
+
     .icon-row {
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 36px;
       align-items: center;
     }
+
     a {
       color: white;
       text-decoration: none;
     }
+
     img.social-icon {
-      width: 52px;
-      height: 52px;
-      transition: transform 0.3s;
-      filter: drop-shadow(0 0 3px black);
-    }
-    img.social-icon:active, img.social-icon:hover {
-      transform: scale(1.13);
-      opacity: 0.9;
+      width: 70px;
+      height: 70px;
+      transition: transform 0.3s, filter 0.3s;
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6));
+      border-radius: 50%;
+      background-color: white;
+      padding: 10px;
     }
 
-    /* Snowflake styling - minimal for mobile */
+    img.social-icon:active,
+    img.social-icon:hover {
+      transform: scale(1.2);
+      filter: brightness(1.1) drop-shadow(0 0 10px white);
+      background-color: #e0e0e0;
+    }
+
+    /* Snowflake styling */
     .snowflake {
       position: absolute;
       top: -10px;
-      width: 8px;
-      height: 8px;
       background: white;
       border-radius: 50%;
-      opacity: 0.8;
+      opacity: 0.7;
       animation: fall linear infinite;
       z-index: 1;
     }
+
     @keyframes fall {
       to {
         transform: translateY(100vh);
@@ -77,19 +87,23 @@
     @media only screen and (max-width: 480px) {
       .container {
         max-width: 95vw;
-        padding: 12px 3vw;
-        border-radius: 15px;
+        padding: 24px 18px;
+        border-radius: 18px;
       }
+
       h1 {
-        font-size: 1.13rem;
-        margin-bottom: 14px;
+        font-size: 1.4rem;
+        margin-bottom: 24px;
       }
+
       img.social-icon {
-        width: 43px;
-        height: 43px;
+        width: 58px;
+        height: 58px;
+        padding: 8px;
       }
+
       .icon-row {
-        gap: 22px;
+        gap: 28px;
       }
     }
   </style>
@@ -100,18 +114,23 @@
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-      const size = Math.random() * 4 + 2;
+      
+      // Increase snowflake size
+      const size = Math.random() * 10 + 6; // Between 6px and 16px
       const left = Math.random() * window.innerWidth;
-      const duration = Math.random() * 6 + 6;
+      const duration = Math.random() * 6 + 6; // 6s to 12s
       const delay = Math.random() * 12;
+
       snowflake.style.width = `${size}px`;
       snowflake.style.height = `${size}px`;
       snowflake.style.left = `${left}px`;
       snowflake.style.animationDuration = `${duration}s`;
       snowflake.style.animationDelay = `${delay}s`;
+
       document.body.appendChild(snowflake);
     }
   </script>
+
   <div class="container">
     <h1>Connect with Me</h1>
     <div class="icon-row">
