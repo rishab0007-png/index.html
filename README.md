@@ -89,20 +89,20 @@
       .container {
         max-width: 100vw !important;
         width: 98vw !important;
-        padding: 36px 6vw !important;
+        padding: 40px 6vw !important;
         border-radius: 14px;
         box-sizing: border-box;
       }
       h1 {
-        font-size: 1.4rem;
-        margin-bottom: 26px;
+        font-size: 1.6rem;
+        margin-bottom: 32px;
       }
       img.social-icon {
-        width: 90px;
-        height: 90px;
+        width: 110px;
+        height: 110px;
       }
       .icon-row {
-        gap: 30px;
+        gap: 36px;
       }
     }
   </style>
