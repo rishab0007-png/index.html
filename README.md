@@ -87,22 +87,22 @@
     }
     @media only screen and (max-width: 480px) {
       .container {
-        max-width: 95vw !important;
-        width: auto !important;
-        padding: 28px 4vw !important;
-        border-radius: 16px;
+        max-width: 100vw !important;
+        width: 98vw !important;
+        padding: 36px 6vw !important;
+        border-radius: 14px;
         box-sizing: border-box;
       }
       h1 {
-        font-size: 1.3rem;
-        margin-bottom: 22px;
+        font-size: 1.4rem;
+        margin-bottom: 26px;
       }
       img.social-icon {
-        width: 72px;
-        height: 72px;
+        width: 90px;
+        height: 90px;
       }
       .icon-row {
-        gap: 24px;
+        gap: 30px;
       }
     }
   </style>
@@ -113,7 +113,7 @@
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-      const size = Math.random() * 10 + 10;
+      const size = Math.random() * 10 + 10; // 10px to 20px
       const left = Math.random() * window.innerWidth;
       const duration = Math.random() * 6 + 8;
       const delay = Math.random() * 12;
