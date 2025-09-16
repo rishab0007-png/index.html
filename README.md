@@ -86,31 +86,32 @@
     }
     @media only screen and (max-width: 480px) {
       .container {
-        max-width: 99vw;
-        padding: 18px 2vw;
+        max-width: 100vw;
+        width: 95vw;
+        padding: 28px 4vw;
         border-radius: 16px;
       }
       h1 {
-        font-size: 1.17rem;
-        margin-bottom: 18px;
+        font-size: 1.3rem;
+        margin-bottom: 22px;
       }
       img.social-icon {
-        width: 56px;
-        height: 56px;
+        width: 72px;
+        height: 72px;
       }
       .icon-row {
-        gap: 18px;
+        gap: 24px;
       }
     }
   </style>
 </head>
 <body>
   <script>
-    const snowflakeCount = 100;  // increased snowflakes count for denser effect
+    const snowflakeCount = 100;  // more flakes
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-      const size = Math.random() * 10 + 10; // snowflake size between 10px and 20px
+      const size = Math.random() * 10 + 10; // 10px to 20px
       const left = Math.random() * window.innerWidth;
       const duration = Math.random() * 6 + 8;
       const delay = Math.random() * 12;
