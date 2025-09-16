@@ -25,6 +25,7 @@
       width: 97vw;
       max-width: 480px;
       z-index: 10;
+      box-sizing: border-box;
     }
     h1 {
       color: white;
@@ -86,10 +87,11 @@
     }
     @media only screen and (max-width: 480px) {
       .container {
-        max-width: 100vw;
-        width: 95vw;
-        padding: 28px 4vw;
+        max-width: 95vw !important;
+        width: auto !important;
+        padding: 28px 4vw !important;
         border-radius: 16px;
+        box-sizing: border-box;
       }
       h1 {
         font-size: 1.3rem;
@@ -107,11 +109,11 @@
 </head>
 <body>
   <script>
-    const snowflakeCount = 100;  // more flakes
+    const snowflakeCount = 100;
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.classList.add("snowflake");
-      const size = Math.random() * 10 + 10; // 10px to 20px
+      const size = Math.random() * 10 + 10;
       const left = Math.random() * window.innerWidth;
       const duration = Math.random() * 6 + 8;
       const delay = Math.random() * 12;
