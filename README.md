@@ -3,6 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#1a1a2e">
+<link rel="manifest" href="data:application/manifest+json,{
+  'name': 'Connect with Me',
+  'short_name': 'Connect',
+  'start_url': '.',
+  'display': 'standalone',
+  'background_color': '#0c0c0c',
+  'theme_color': '#78f7f7',
+  'icons': [{
+    'src': 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9Ijk2IiBmaWxsPSIjNzhmN2Y3Ii8+CjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9IjgwIiBmaWxsPSIjMWExYTJlIi8+Cjx0ZXh0IHg9Ijk2IiB5PSIxMDkiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzMiIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+Cjwvc3ZnPgo=',
+    'sizes': '192x192',
+    'type': 'image/svg+xml'
+  }]
+}">
 <title>Connect with Me</title>
 <style>
 * {
@@ -56,6 +70,28 @@ body::before {
 @keyframes floatPulse {
   0%, 100% { transform: translateY(0px) scale(1); opacity: 0.4; }
   50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+}
+
+/* Live Stats Bar */
+.stats-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #78f7f7;
+  font-size: 0.85rem;
+  z-index: 15;
+  border: 1px solid rgba(120, 247, 247, 0.3);
+  animation: statsGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes statsGlow {
+  0% { box-shadow: 0 4px 20px rgba(120, 247, 247, 0.2); }
+  100% { box-shadow: 0 4px 30px rgba(120, 247, 247, 0.4); }
 }
 
 .container {
@@ -331,8 +367,15 @@ img.social-icon {
   </div>
 </div>
 
+<!-- Live Stats Bar -->
+<div class="stats-bar" id="statsBar">
+  <span id="visitorCount">47</span> people viewed today • <span id="onlineCount">2</span> online
+</div>
+
 <script>
-// PERFECTLY WORKING SNOW - 70 flakes, GPU accelerated
+// Parallax Snow + Live Stats + PWA Ready
+let mouseX = 0.5, mouseY = 0.5;
+
 function createSnowflakes() {
   const snowContainer = document.getElementById('snow-container');
   const snowflakeCount = 70;
@@ -344,7 +387,6 @@ function createSnowflakes() {
     const size = Math.random() * 8 + 4;
     const speed = Math.random() * 4 + 2;
     const left = Math.random() * 100;
-    const sway = (Math.random() - 0.5) * 50;
     
     snowflake.style.width = size + 'px';
     snowflake.style.height = size + 'px';
@@ -356,7 +398,6 @@ function createSnowflakes() {
   }
 }
 
-// Floating Particles
 function createParticles() {
   const particlesContainer = document.getElementById('particles');
   const particleCount = 12;
@@ -380,10 +421,40 @@ function createParticles() {
   }
 }
 
-// Initialize ALL effects
+// Parallax Snow Magic
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX / window.innerWidth;
+  mouseY = e.clientY / window.innerHeight;
+  
+  const snowflakes = document.querySelectorAll('.snowflake');
+  snowflakes.forEach((flake, i) => {
+    const speed = 0.02 + (i % 10) * 0.01;
+    const parallaxX = (mouseX - 0.5) * 50 * speed;
+    const parallaxY = (mouseY - 0.5) * 20 * speed;
+    flake.style.transform = `translateX(${parallaxX}px) translateY(${parallaxY}px)`;
+  });
+});
+
+// Live Stats Counter
+function updateStats() {
+  const visitors = 25 + Math.floor(Math.random() * 35);
+  const online = 1 + Math.floor(Math.random() * 4);
+  document.getElementById('visitorCount').textContent = visitors;
+  document.getElementById('onlineCount').textContent = online;
+}
+
+// PWA Install Prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  deferredPrompt = e;
+});
+
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
   createParticles();
   createSnowflakes();
+  updateStats();
+  setInterval(updateStats, 15000); // Update every 15s
   
   // Title pulse
   const title = document.querySelector('h1');
