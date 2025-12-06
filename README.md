@@ -25,6 +25,11 @@
   box-sizing: border-box;
 }
 
+/* Hide filename completely */
+body::after {
+  content: none !important;
+}
+
 body {
   height: 100vh;
   background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
