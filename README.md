@@ -165,9 +165,10 @@ img.social-icon {
   transform: scale(1.05) translateY(-4px);
 }
 
-/* Enhanced Snow */
+/* Fixed Snow - Starts from TOP of screen */
 .snowflake {
-  position: absolute;
+  position: fixed;
+  top: -10px;
   background: linear-gradient(45deg, #ffffff, #f0f8ff);
   border-radius: 50%;
   opacity: 0.8;
@@ -178,9 +179,12 @@ img.social-icon {
 }
 
 @keyframes snowfall {
-  0% { transform: translateY(-10px) rotate(0deg); opacity: 0.8; }
+  0% { 
+    transform: translateY(0) rotate(0deg); 
+    opacity: 0.8; 
+  }
   100% { 
-    transform: translateY(100vh) rotate(360deg); 
+    transform: translateY(110vh) rotate(360deg); 
     opacity: 0; 
   }
 }
@@ -230,7 +234,7 @@ img.social-icon {
 </div>
 
 <script>
-// Enhanced Cinematic Snow
+// Enhanced Cinematic Snow - FIXED to start from TOP
 function createSnowflakes() {
   const snowContainer = document.getElementById('snow-container');
   const snowflakeCount = 120;
@@ -251,7 +255,7 @@ function createSnowflakes() {
     
     snowContainer.appendChild(snowflake);
     
-    // Respawn snowflakes
+    // Respawn snowflakes from TOP
     setTimeout(() => {
       snowflake.style.animation = 'none';
       snowflake.offsetHeight; // Trigger reflow
