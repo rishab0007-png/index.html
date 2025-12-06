@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Connect with Me</title>
   <style>
-    /* ---------- GLOBAL ---------- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -24,60 +23,20 @@
       color: #fff;
     }
 
-    /* Vignette cinematic dark edges */
     .vignette {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background: radial-gradient(circle at center, transparent 0, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.85) 100%);
+      background: radial-gradient(circle at center, transparent 0, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.9) 100%);
       z-index: 1;
     }
 
-    /* Intro black fade like movie */
-    .intro-fade {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      z-index: 999;
-      animation: introFade 1.4s ease-out forwards;
-    }
-
-    /* Moving light blobs (parallax style) */
-    .light-orbit {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.7;
-      z-index: 0;
-      pointer-events: none;
-      mix-blend-mode: screen;
-    }
-    .light-orbit.one {
-      width: 520px;
-      height: 520px;
-      background: radial-gradient(circle, #2ba84a55, transparent 60%);
-      animation: orbitOne 32s linear infinite;
-    }
-    .light-orbit.two {
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, #0088cc70, transparent 60%);
-      animation: orbitTwo 40s linear infinite;
-    }
-    .light-orbit.three {
-      width: 360px;
-      height: 360px;
-      background: radial-gradient(circle, #e1306c70, transparent 60%);
-      animation: orbitThree 50s linear infinite;
-    }
-
-    /* ---------- GLASS CARD ---------- */
     .container {
       position: relative;
       z-index: 5;
       width: 95vw;
       max-width: 460px;
-      padding: 32px 22px 26px;
+      padding: 30px 22px 26px;
       border-radius: 22px;
       background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(10,10,20,0.85));
       border: 1px solid rgba(255, 255, 255, 0.16);
@@ -87,30 +46,25 @@
         0 0 30px rgba(0,0,0,0.9),
         0 0 60px rgba(0,0,0,0.9),
         0 0 30px rgba(108, 122, 255, 0.35);
-
-      opacity: 0;
-      transform: translateY(32px) scale(0.96);
-      animation: cardIn 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s forwards,
-                 cardFloat 7s ease-in-out 1.5s infinite;
+      animation: cardFloat 7s ease-in-out 1.5s infinite;
       overflow: hidden;
     }
 
-    /* Light sweep over card */
     .container::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.16) 50%, transparent 70%);
       transform: translateX(-140%);
       opacity: 0.9;
       pointer-events: none;
-      animation: lightSweep 4.2s ease-in-out 1.2s infinite;
+      animation: lightSweep 4.5s ease-in-out 1.4s infinite;
     }
 
     h1 {
       font-weight: 500;
-      font-size: 1.9rem;
-      letter-spacing: 1.5px;
+      font-size: 1.8rem;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
       text-align: center;
       margin-bottom: 8px;
@@ -122,27 +76,24 @@
       color: #d0d0e5;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      opacity: 0;
-      transform: translateY(12px);
-      animation: fadeUp 0.9s ease-out 0.7s forwards;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .line {
       width: 72px;
       height: 1px;
-      margin: 0 auto 22px;
+      margin: 0 auto 20px;
       background: linear-gradient(to right, transparent, #57f5ff, transparent);
-      opacity: 0;
-      animation: fadeIn 1s ease-out 0.85s forwards;
     }
 
     .icon-row {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
       gap: 28px;
       margin-bottom: 12px;
+      position: relative;
+      padding-top: 40px;
     }
 
     a {
@@ -155,29 +106,19 @@
       padding: 8px;
       border-radius: 28%;
       cursor: pointer;
+      /* start high and invisible; JS will trigger fall animation */
       opacity: 0;
-      transform: translateY(18px) scale(0.9);
-    }
-
-    .icon-wrapper:nth-child(1) {
-      animation: fadeUp 0.85s ease-out 0.9s forwards;
-    }
-    .icon-wrapper:nth-child(2) {
-      animation: fadeUp 0.85s ease-out 1.05s forwards;
-    }
-    .icon-wrapper:nth-child(3) {
-      animation: fadeUp 0.85s ease-out 1.2s forwards;
+      transform: translateY(-220px);
     }
 
     .icon-pulse {
       position: absolute;
-      inset: 8%;
+      inset: 10%;
       border-radius: 30%;
       border: 1px solid rgba(255, 255, 255, 0.5);
-      opacity: 0.7;
+      opacity: 0;
       transform: scale(0.7);
       pointer-events: none;
-      animation: pulseRing 2.9s ease-out infinite;
     }
 
     img.social-icon {
@@ -187,6 +128,7 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
       box-shadow: 0 0 22px rgba(255, 255, 255, 0.65);
     }
+
     a[aria-label="WhatsApp"] img.social-icon {
       filter: drop-shadow(0 0 18px #2ba84a);
     }
@@ -199,7 +141,7 @@
 
     .icon-wrapper:hover img.social-icon,
     .icon-wrapper:active img.social-icon {
-      transform: scale(1.16) translateY(-4px);
+      transform: scale(1.12) translateY(-4px);
       box-shadow: 0 0 30px #fff, 0 0 26px rgba(255,255,255,0.9);
       filter: brightness(1.05);
     }
@@ -208,14 +150,26 @@
       font-size: 0.78rem;
       text-align: center;
       color: #b6b6d6;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeUp 0.9s ease-out 1.4s forwards;
+      margin-top: 6px;
     }
 
-    /* ---------- PARTICLES (like cinematic dust) ---------- */
+    /* Snowflakes in background */
+    .snowflake {
+      position: fixed;
+      top: -20px;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      filter: blur(1px);
+      z-index: 0;
+      animation: snowFall linear infinite;
+    }
+
+    /* Small cinematic dust particles */
     .particle {
-      position: absolute;
+      position: fixed;
       width: 3px;
       height: 3px;
       border-radius: 50%;
@@ -225,6 +179,69 @@
       animation: particleDrift linear infinite;
       z-index: 0;
       pointer-events: none;
+    }
+
+    /* KEYFRAMES */
+
+    @keyframes cardFloat {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes lightSweep {
+      0%   { transform: translateX(-140%); }
+      50%  { transform: translateX(0); }
+      100% { transform: translateX(140%); }
+    }
+
+    /* icon falling with bounce and settling */
+    @keyframes iconFall {
+      0% {
+        opacity: 0;
+        transform: translateY(-220px);
+      }
+      40% {
+        opacity: 1;
+      }
+      70% {
+        transform: translateY(10px);
+      }
+      85% {
+        transform: translateY(-6px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseRing {
+      0% {
+        opacity: 0.7;
+        transform: scale(0.7);
+      }
+      70% {
+        opacity: 0;
+        transform: scale(1.3);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.3);
+      }
+    }
+
+    @keyframes snowFall {
+      0% {
+        transform: translate3d(0, -20px, 0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate3d(-30px, 110vh, 0);
+        opacity: 0;
+      }
     }
 
     @keyframes particleDrift {
@@ -244,96 +261,10 @@
       }
     }
 
-    /* ---------- KEYFRAMES ---------- */
-    @keyframes introFade {
-      0% { opacity: 1; }
-      60% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes cardIn {
-      0% {
-        opacity: 0;
-        transform: translateY(32px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes cardFloat {
-      0%   { transform: translateY(0) scale(1); }
-      50%  { transform: translateY(-8px) scale(1.01); }
-      100% { transform: translateY(0) scale(1); }
-    }
-
-    @keyframes fadeUp {
-      0% {
-        opacity: 0;
-        transform: translateY(16px) scale(0.96);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    @keyframes pulseRing {
-      0% {
-        opacity: 0.8;
-        transform: scale(0.7);
-      }
-      70% {
-        opacity: 0;
-        transform: scale(1.2);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.2);
-      }
-    }
-
-    @keyframes lightSweep {
-      0% {
-        transform: translateX(-140%);
-      }
-      50% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(140%);
-      }
-    }
-
-    @keyframes orbitOne {
-      0%   { transform: translate(-120px, -120px) rotate(0deg); }
-      50%  { transform: translate(40px, 30px) rotate(180deg); }
-      100% { transform: translate(-120px, -120px) rotate(360deg); }
-    }
-
-    @keyframes orbitTwo {
-      0%   { transform: translate(120px, 160px) rotate(0deg); }
-      50%  { transform: translate(-40px, 40px) rotate(180deg); }
-      100% { transform: translate(120px, 160px) rotate(360deg); }
-    }
-
-    @keyframes orbitThree {
-      0%   { transform: translate(0px, 40px) rotate(0deg); }
-      50%  { transform: translate(-80px, -40px) rotate(180deg); }
-      100% { transform: translate(0px, 40px) rotate(360deg); }
-    }
-
-    /* ---------- MOBILE ---------- */
     @media (max-width: 480px) {
       .container {
         width: 94vw;
-        padding: 28px 6vw 22px;
+        padding: 26px 6vw 22px;
         border-radius: 18px;
       }
       h1 {
@@ -353,19 +284,11 @@
   </style>
 </head>
 <body>
-  <!-- Cinematic overlays -->
-  <div class="intro-fade"></div>
   <div class="vignette"></div>
 
-  <!-- Moving lights -->
-  <div class="light-orbit one"></div>
-  <div class="light-orbit two"></div>
-  <div class="light-orbit three"></div>
-
-  <!-- Glass card -->
   <div class="container">
     <h1>Connect with Me</h1>
-    <div class="subtitle">Tap any icon to start a conversation</div>
+    <div class="subtitle">Icons fall like snow, then wait for you</div>
     <div class="line"></div>
 
     <div class="icon-row">
@@ -385,23 +308,57 @@
       </a>
     </div>
 
-    <div class="note">Available on WhatsApp, Instagram and Telegram for quick replies.</div>
+    <div class="note">Available on WhatsApp, Instagram, and Telegram.</div>
   </div>
 
   <script>
-    // Small floating particles for cinematic feel
-    const particleCount = 40;
+    // Make icons fall from top with staggered timing
+    const iconWrappers = document.querySelectorAll(".icon-wrapper");
+
+    iconWrappers.forEach((icon, index) => {
+      const delay = 400 + index * 250; // ms
+      setTimeout(() => {
+        icon.style.animation = `iconFall 1.2s cubic-bezier(0.25, 0.9, 0.3, 1.2) forwards`;
+        // start pulse a bit after landing
+        const pulse = icon.querySelector(".icon-pulse");
+        setTimeout(() => {
+          pulse.style.opacity = "0.7";
+          pulse.style.animation = "pulseRing 2.6s ease-out infinite";
+        }, 900);
+      }, delay);
+    });
+
+    // Background snow falling from top
+    const snowCount = 45;
+    for (let i = 0; i < snowCount; i++) {
+      const s = document.createElement("div");
+      s.classList.add("snowflake");
+      const size = Math.random() * 6 + 4; // 4–10px
+      const left = Math.random() * window.innerWidth;
+      const duration = 8000 + Math.random() * 6000;
+
+      s.style.width = size + "px";
+      s.style.height = size + "px";
+      s.style.left = left + "px";
+      s.style.animationDuration = duration + "ms";
+      s.style.animationDelay = Math.random() * 8000 + "ms";
+
+      document.body.appendChild(s);
+    }
+
+    // Cinematic small particles drifting
+    const particleCount = 30;
     for (let i = 0; i < particleCount; i++) {
       const p = document.createElement("div");
       p.classList.add("particle");
       const startX = Math.random() * window.innerWidth;
       const startY = Math.random() * window.innerHeight;
-      const duration = 8000 + Math.random() * 8000;
+      const duration = 9000 + Math.random() * 9000;
 
       p.style.left = startX + "px";
       p.style.top = startY + "px";
       p.style.animationDuration = duration + "ms";
-      p.style.animationDelay = Math.random() * 8000 + "ms";
+      p.style.animationDelay = Math.random() * 9000 + "ms";
 
       document.body.appendChild(p);
     }
