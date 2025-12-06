@@ -42,6 +42,22 @@ body::before {
   100% { opacity: 1; transform: scale(1.05); }
 }
 
+/* Glowing Particles */
+.particle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle.cyan { background: radial-gradient(circle, #00f5ff, transparent); }
+.particle.purple { background: radial-gradient(circle, #8a2be2, transparent); }
+
+@keyframes floatPulse {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.4; }
+  50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+}
+
 .container {
   background: rgba(15, 15, 25, 0.85);
   backdrop-filter: blur(20px);
@@ -57,6 +73,26 @@ body::before {
   max-width: 500px;
   width: 95vw;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: neonPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% { 
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.5),
+      0 0 100px rgba(120, 78, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 30px rgba(120, 119, 198, 0.5);
+    border-color: rgba(120, 119, 198, 0.3);
+  }
+  100% { 
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.5),
+      0 0 100px rgba(120, 219, 255, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 50px rgba(120, 219, 255, 0.7);
+    border-color: rgba(120, 219, 255, 0.5);
+  }
 }
 
 h1 {
@@ -95,6 +131,7 @@ h1::after {
 .social-link {
   position: relative;
   cursor: pointer;
+  outline: none;
 }
 
 img.social-icon {
@@ -107,6 +144,7 @@ img.social-icon {
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.2);
   pointer-events: none;
+  will-change: transform, box-shadow;
 }
 
 .social-link.whatsapp img.social-icon {
@@ -122,6 +160,31 @@ img.social-icon {
 .social-link.telegram img.social-icon {
   filter: drop-shadow(0 0 25px #0088CC);
   box-shadow: 0 15px 40px rgba(0, 136, 204, 0.4);
+}
+
+/* Icon Trails */
+.social-link.whatsapp:hover img.social-icon {
+  box-shadow: 
+    0 25px 60px rgba(37, 211, 102, 0.6),
+    0 0 50px #25D366,
+    -20px -20px 40px rgba(37, 211, 102, 0.3),
+    20px 20px 40px rgba(37, 211, 102, 0.2);
+}
+
+.social-link.instagram:hover img.social-icon {
+  box-shadow: 
+    0 25px 60px rgba(228, 64, 95, 0.6),
+    0 0 50px #E4405F,
+    -20px -20px 40px rgba(228, 64, 95, 0.3),
+    20px 20px 40px rgba(228, 64, 95, 0.2);
+}
+
+.social-link.telegram:hover img.social-icon {
+  box-shadow: 
+    0 25px 60px rgba(0, 136, 204, 0.6),
+    0 0 50px #0088CC,
+    -20px -20px 40px rgba(0, 136, 204, 0.3),
+    20px 20px 40px rgba(0, 136, 204, 0.2);
 }
 
 /* Cinematic Drop Animation */
@@ -155,40 +218,33 @@ img.social-icon {
   }
 }
 
-/* Hover Effects */
-.social-link:hover img.social-icon {
-  transform: scale(1.15) translateY(-8px) rotate(5deg);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 50px currentColor;
-}
-
-.social-link:active img.social-icon {
-  transform: scale(1.05) translateY(-4px);
-}
-
-/* Fixed Snow - Starts from TOP of screen */
+/* Optimized Snow */
 .snowflake {
   position: fixed;
   top: -10px;
   background: linear-gradient(45deg, #ffffff, #f0f8ff);
   border-radius: 50%;
   opacity: 0.8;
-  animation: snowfall linear infinite;
   z-index: 2;
   filter: blur(0.5px);
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  will-change: transform;
 }
 
 @keyframes snowfall {
-  0% { 
-    transform: translateY(0) rotate(0deg); 
-    opacity: 0.8; 
-  }
-  100% { 
-    transform: translateY(110vh) rotate(360deg); 
-    opacity: 0; 
-  }
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .snowflake { display: none; }
+  body::before { animation: none; }
+  .container { animation: none; }
+}
+
+/* Mobile-First UX */
 @media (max-width: 480px) {
   .container {
     padding: 40px 25px;
@@ -197,23 +253,51 @@ img.social-icon {
   }
   
   h1 {
-    font-size: 1.9rem;
+    font-size: 2rem;
     margin-bottom: 35px;
   }
   
   img.social-icon {
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
   }
   
   .icon-container {
-    gap: 40px;
+    gap: 35px;
+  }
+  
+  /* Touch Ripple */
+  .social-link::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    pointer-events: none;
+  }
+  
+  .social-link:active::after {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (hover: none) {
+  .social-link:active img.social-icon {
+    transform: scale(0.95);
   }
 }
 </style>
 </head>
 <body>
-<!-- Enhanced Snow Effect -->
+<!-- Floating Particles -->
+<div id="particles"></div>
+<!-- Snow Container -->
 <div id="snow-container"></div>
 
 <div class="container">
@@ -234,10 +318,12 @@ img.social-icon {
 </div>
 
 <script>
-// Enhanced Cinematic Snow - FIXED to start from TOP
+// Optimized 60fps Snow with requestAnimationFrame
 function createSnowflakes() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  
   const snowContainer = document.getElementById('snow-container');
-  const snowflakeCount = 120;
+  const snowflakeCount = 70; // Reduced from 120
   
   for (let i = 0; i < snowflakeCount; i++) {
     const snowflake = document.createElement('div');
@@ -254,21 +340,39 @@ function createSnowflakes() {
     snowflake.style.animationDelay = Math.random() * 5 + 's';
     
     snowContainer.appendChild(snowflake);
-    
-    // Respawn snowflakes from TOP
-    setTimeout(() => {
-      snowflake.style.animation = 'none';
-      snowflake.offsetHeight; // Trigger reflow
-      snowflake.style.animation = `snowfall ${speed}s linear infinite`;
-    }, speed * 1000);
   }
 }
 
-// Initialize cinematic effects
+// Floating Particles
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = 12;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = `particle ${Math.random() > 0.5 ? 'cyan' : 'purple'}`;
+    
+    const size = Math.random() * 12 + 6;
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const duration = Math.random() * 8 + 6;
+    
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.left = x + '%';
+    particle.style.top = y + '%';
+    particle.style.animation = `floatPulse ${duration}s ease-in-out infinite`;
+    
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
+  createParticles();
   createSnowflakes();
   
-  // Add pulse effect to title
+  // Title pulse
   const title = document.querySelector('h1');
   setInterval(() => {
     title.style.textShadow = 
